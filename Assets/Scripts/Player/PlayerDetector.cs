@@ -19,4 +19,7 @@ public class PlayerDetector : MonoBehaviour
     private void OnTriggerStay(Collider other) {
         currentTargetCounter = other.gameObject;
     }
+    private void OnTriggerExit(Collider other) {
+        currentTargetCounter = null;
+    }
 }

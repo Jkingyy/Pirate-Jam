@@ -12,7 +12,6 @@ public class PlayerInteractions : MonoBehaviour
 
     [SerializeField] private Transform _objAnchor;
 
-    private bool _isInteracting = false;
     private bool _isActioning = false;
 
 
@@ -34,11 +33,14 @@ public class PlayerInteractions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleInteractions();
+        HandleActions();
+    }
+
+
+    void HandleInteractions(){
         if(_interactAction.WasPressedThisFrame()){
             if(_playerDetector.currentTargetCounter == null) return;
-
-            float dot = Vector3.Dot(transform.forward, (_playerDetector.currentTargetCounter.transform.position - transform.position).normalized);
-            if(dot < 0.7f) return;
             GameObject parent = GetParentObj(_playerDetector.currentTargetCounter);
             if(parent.GetComponent<Worktop>() == null) return;       
             IInteractable interactable = parent.GetComponent<IInteractable>();
@@ -47,9 +49,19 @@ public class PlayerInteractions : MonoBehaviour
                 interactable.Interact(this.gameObject, holdingItem , _objAnchor);
             }
         }
-
     }
+    void HandleActions(){
+        if(_actionAction.WasPressedThisFrame()){
+            _isActioning = true;
+        } else if(_actionAction.WasReleasedThisFrame()){
+            _isActioning = false;
+        }
 
+        if(_isActioning){
+            if(_playerDetector.currentTargetCounter == null) return;
+            Debug.Log("Actioning");
+        }
+    }
     private GameObject GetParentObj(GameObject obj)
     {
         if (obj.transform.parent == null)
@@ -62,9 +74,11 @@ public class PlayerInteractions : MonoBehaviour
     private void OnEnable()
     {
         _interactAction.Enable();
+        _actionAction.Enable();
     }
     private void OnDisable()
     {
         _interactAction.Disable();
+        _actionAction.Disable();
     }
 }

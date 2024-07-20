@@ -8,6 +8,7 @@ public class Worktop : MonoBehaviour, IInteractable
     public GameObject heldItem;
     private PlayerInteractions _playerInteractions;
     private Transform _objAnchor;
+    public bool hasChoppingBoard = false;
 
     private void Start() {
         _objAnchor = transform.Find("Obj Anchor");
@@ -17,11 +18,17 @@ public class Worktop : MonoBehaviour, IInteractable
         } else {
             heldItem = null;
         }
+
+        Transform choppingBoard = transform.Find("Chopping Board");
+        if(choppingBoard != null){
+            hasChoppingBoard = true;
+        }
     }
 
     public void Interact(GameObject player, bool holdingItem, Transform playerObjAnchor){
         _playerInteractions = player.GetComponent<PlayerInteractions>();
         if(holdingItem){
+            if(heldItem != null) return;
             Drop();
         } else {
             if(heldItem == null) return;
@@ -46,6 +53,6 @@ public class Worktop : MonoBehaviour, IInteractable
 
     private void ResetPositionAndRotation(GameObject obj){
         obj.transform.localPosition = Vector3.zero;
-        obj.transform.localRotation = Quaternion.Euler(new Vector3(0,0,90));
+        obj.transform.localRotation = Quaternion.identity;
     }
 }
