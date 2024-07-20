@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor.Callbacks;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class Player3DMovement : MonoBehaviour
 {
 
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float turnSmoothTime = 0.1f;
+    [SerializeField] private float turnSpeed = 5f;
+    [SerializeField] private float StickThreshold = 0.1f;
     private PlayerInput _playerInput;
     private InputAction _moveAction;
 
     private float turnSmoothVelocity;
     private Rigidbody _rb;
-
     
+    private Vector3 _input;
 
     private void Awake()
     {
@@ -30,6 +33,10 @@ public class Player3DMovement : MonoBehaviour
         
     }
 
+    private void Update() {
+        GatherInput();
+        Look();
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -38,13 +45,21 @@ public class Player3DMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector2 direction = _moveAction.ReadValue<Vector2>();
-        if(direction.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0, angle, 0);           
-        } 
-        _rb.velocity = new Vector3(direction.x, 0, direction.y) * moveSpeed;
+        if(_input.magnitude < StickThreshold) return;
+        _rb.MovePosition(transform.position + _input.ToIso() * _input.normalized.magnitude * moveSpeed * Time.deltaTime);
+    }
+
+    void Look(){
+        if(_input == Vector3.zero || _input.magnitude < StickThreshold) return;
+
+        var rotation = Quaternion.LookRotation(_input.ToIso(), Vector3.up);
+        transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, turnSpeed * Time.deltaTime);
+        
+
+    }
+
+    void GatherInput(){
+        _input = new Vector3(_moveAction.ReadValue<Vector2>().x, 0, _moveAction.ReadValue<Vector2>().y);
+
     }
 }
