@@ -35,7 +35,19 @@ public class Worktop : MonoBehaviour, IInteractable
             PickUp(player, playerObjAnchor);
         }
     }
-
+    public void Action(){
+        if(hasChoppingBoard){
+            Chop();
+        }
+    }
+    private void Chop(){
+        Food food = heldItem.GetComponent<Food>();
+        if(food == null) return;
+        food.IncrementFoodIndex();
+        if(food != null){
+            food.ChangeFoodPrefab(this);
+        }
+    }
     private void PickUp(GameObject player, Transform playerObjAnchor){
         heldItem.transform.SetParent(playerObjAnchor);
         _playerInteractions.heldItem = heldItem;
