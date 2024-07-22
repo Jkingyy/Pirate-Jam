@@ -40,13 +40,14 @@ public class Player2DMovement : MonoBehaviour
     /// </summary>
     private Rigidbody2D _rb;
     private Collider2D col;
-    //private Animator _animator;
-
+    private Animator _animator;
+    private TrailRenderer trailRenderer;
 
     private void Awake() {
         _rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
-        //_animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
+        trailRenderer = GetComponent<TrailRenderer>();
         _playerInput = GetComponent<PlayerInput>();
         _moveAction = _playerInput.actions.FindAction("Move 2D");
         _dashAction = _playerInput.actions.FindAction("Dash");
@@ -61,6 +62,7 @@ public class Player2DMovement : MonoBehaviour
     void Update()
     {
         GetInputs();
+        Animate();
         if(_canDash && _dashAction.WasPressedThisFrame()){
             StartCoroutine(Dash());
         }
@@ -85,11 +87,20 @@ public class Player2DMovement : MonoBehaviour
         _isDashing = true;
         _rb.velocity = _movementInput.normalized * dashPower;
         col.isTrigger = true;
+        trailRenderer.emitting = true;
         yield return new WaitForSeconds(dashDistance);
         _isDashing = false;
+        trailRenderer.emitting = false;
         _rb.velocity = Vector2.zero;
         col.isTrigger = false;
         yield return new WaitForSeconds(dashCooldown);
         _canDash = true;
+    }
+
+    void Animate(){
+        if(_movementInput.magnitude == 0) return;
+        _animator.SetFloat("Horizontal", _movementInput.x);
+        _animator.SetFloat("Vertical", _movementInput.y);
+        _animator.SetFloat("Speed", _movementInput.sqrMagnitude);
     }
 }
