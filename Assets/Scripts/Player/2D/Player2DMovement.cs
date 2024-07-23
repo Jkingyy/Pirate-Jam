@@ -98,9 +98,9 @@ public class Player2DMovement : MonoBehaviour
     }
 
     void Animate(){
+        _animator.SetFloat("Speed", _movementInput.sqrMagnitude);
         if(_movementInput.magnitude == 0) return;
         _animator.SetFloat("Horizontal", _movementInput.x);
         _animator.SetFloat("Vertical", _movementInput.y);
-        _animator.SetFloat("Speed", _movementInput.sqrMagnitude);
     }
 }
