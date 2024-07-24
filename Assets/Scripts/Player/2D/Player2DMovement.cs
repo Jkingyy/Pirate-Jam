@@ -7,12 +7,15 @@ using UnityEngine.InputSystem;
 public class Player2DMovement : MonoBehaviour
 {
     /// <summary>
-    /// ////////////////MOVEMENT SERIALIZED////////////////////////
+    /// ////////////////SERIALIZED////////////////////////
     /// </summary>
 
     [SerializeField] private float StickThreshold = 0.1f;
-
+    
+    [Header("Pivots")]
     [SerializeField] private GameObject cursorPivot;
+
+
 
     [Header("Movement Speeds")]
     [SerializeField] private float moveSpeed = 5f;
@@ -33,7 +36,6 @@ public class Player2DMovement : MonoBehaviour
     private InputAction _moveAction;
     private InputAction _dashAction;
     private InputAction _cursorAction;
-
     private string keyboardMouse = "Keyboard&Mouse";
     private string controller = "Controller";
     private string currentControlScheme;
@@ -62,7 +64,6 @@ public class Player2DMovement : MonoBehaviour
         _moveAction = _playerInput.actions.FindAction("Move 2D");
         _dashAction = _playerInput.actions.FindAction("Dash");
         _cursorAction = _playerInput.actions.FindAction("Cursor");
-    
     }
     // Start is called before the first frame update
     void Start()
@@ -83,6 +84,21 @@ public class Player2DMovement : MonoBehaviour
         if(currentControlScheme == controller){
             ControllerCursor();
         }
+
+
+    }
+
+    public float GetAttackDirection(){
+        Vector2 target;
+        if(currentControlScheme == keyboardMouse){
+            target = Helpers.GetMousePosition();
+        } else {
+            target = _cursorAction.ReadValue<Vector2>();
+        }
+        
+        Vector2 direction = target;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        return angle;
     }
 
     void ControllerCursor(){
