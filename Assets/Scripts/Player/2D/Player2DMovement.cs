@@ -44,7 +44,7 @@ public class Player2DMovement : MonoBehaviour
     /// ////////////////BOOL CHECKS////////////////////////
     /// </summary>
     private bool _isDashing;
-    private bool _canDash = true;
+    public bool _canDash = true;
 
     
     /// <summary>

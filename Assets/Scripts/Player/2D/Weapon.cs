@@ -11,9 +11,9 @@ public class Weapon : MonoBehaviour
 
     PlayerInput playerInput;
     InputAction _lightAttackAction;
+    
 
-
-    bool canAttack = true;
+    public bool canAttack = true;
     Player2DMovement movementScript;
 
     private void Awake() {
