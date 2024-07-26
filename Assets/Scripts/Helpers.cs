@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public static class Helpers
 {
@@ -20,7 +21,7 @@ public static class Helpers
 
     public static Vector3 GetMousePosition()
     {
-        return Camera.ScreenToWorldPoint(Input.mousePosition);
+        return Camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }
     
     

@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - HealthBar
+  - HealsCounter
   layers:
   - Default
   - TransparentFX
@@ -43,4 +45,7 @@ TagManager:
     locked: 0
   - name: World Space UI
     uniqueID: 2998289111
+    locked: 0
+  - name: Player
+    uniqueID: 238761381
     locked: 0

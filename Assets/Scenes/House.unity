@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodPrefabs:
-  - {fileID: 7924518057386953967, guid: 1ea16732572aad644848b14ff2251c9d, type: 3}
+  - {fileID: 919132149155446097, guid: 54737001437161a419f7ac8277e8159b, type: 3}
   - {fileID: 5329766791141343769, guid: ab4b763ce571671418b4bdd425381deb, type: 3}
   - {fileID: 3839220814282902455, guid: 7b3f9ed1aea2d1942b28c20ab010768f, type: 3}
   foodIndex: 0
