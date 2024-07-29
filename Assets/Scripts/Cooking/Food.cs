@@ -4,33 +4,52 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    [SerializeField] private GameObject[] foodPrefabs;
-    private GameObject currentFoodPrefab;
-    public int foodIndex = 0;
+    [SerializeField] private FoodSO foodSO;
+
+    public GameObject foodObj;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentFoodPrefab = Instantiate(foodPrefabs[foodIndex], transform.position, Quaternion.identity,this.transform);
+        if (transform.childCount == 0)
+        {
+            foodSO.ResetIndex();
+            foodSO.currentFoodPrefab = foodSO.foodPrefabs[0];
+            SpawnFood();
+        }
+    }
+
+    public void Chop()
+    {
+        if (!foodSO.isChoppable) return;
+        Destroy(foodObj);
+        if (IncrementFoodIndex())
+        {
+            SpawnFood();
+        }
+    }
+    private bool IncrementFoodIndex()
+    {
+        foodSO.foodIndex++;
+
+        if (foodSO.foodIndex >= foodSO.foodPrefabs.Length)
+        {
+            Destroy(gameObject);
+            return false;
+        }
+        foodSO.currentFoodPrefab = foodSO.foodPrefabs[foodSO.foodIndex];
+        return true;
+    }
+
+    private void SpawnFood()
+    {
+
+        foodObj = Instantiate(foodSO.currentFoodPrefab, transform.position, Quaternion.identity, transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    public void IncrementFoodIndex(){
-        foodIndex++;
 
-        
-    }
-    public void ChangeFoodPrefab(Worktop worktop){
-        if(foodIndex >= foodPrefabs.Length){
-            worktop.heldItem = null;
-            Destroy(this.gameObject);
-            return;
-        }
-        Destroy(currentFoodPrefab);
-        currentFoodPrefab = Instantiate(foodPrefabs[foodIndex], transform.position, Quaternion.identity,this.transform);
     }
 }

@@ -39,8 +39,12 @@ public class Player3DMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if(_input.magnitude < StickThreshold) return;
-        _rb.MovePosition(transform.position + _input.ToIso() * _input.normalized.magnitude * moveSpeed * Time.deltaTime);
+        if(_input.magnitude < StickThreshold) 
+        {
+            _rb.velocity = Vector3.zero;
+            return;
+        }
+        _rb.velocity = transform.forward * _input.normalized.magnitude * moveSpeed;
     }
 
     void Look(){

@@ -49,8 +49,8 @@ public class PlayerInteractions : MonoBehaviour
         
     }
     void HandleActions(){
-        if(!IsInRangeOfCounter(out Worktop parent)) return;
-        if(parent.heldItem == null) return;
+        if(!IsInRangeOfCounter(out Worktop counter)) return;
+        if(counter.heldItem == null) return;
         if(_actionAction.WasPressedThisFrame()){
             EnableProgressBar();
         } else if(_actionAction.WasReleasedThisFrame()){
@@ -62,7 +62,7 @@ public class PlayerInteractions : MonoBehaviour
         } 
         if(progressBarImage.fillAmount >= 1){
             DisableProgressBar();
-            parent.Action();
+            counter.Action();
             
         }
     }
@@ -79,13 +79,12 @@ public class PlayerInteractions : MonoBehaviour
         progressBar.SetActive(true);
     }
 
-    bool IsInRangeOfCounter(out Worktop parent){
-            parent = null;
-            if(_playerDetector.currentTargetCounter == null) return false;
-            GameObject parentObj = GetParentObj(_playerDetector.currentTargetCounter);
-            parent = parentObj.GetComponent<Worktop>();
-            if(parent.GetComponent<Worktop>() == null) return false;      
-            return true; 
+    bool IsInRangeOfCounter(out Worktop counter){
+        counter = null;
+        if(_playerDetector.currentTargetCounter == null) return false;
+        counter = _playerDetector.currentTargetCounter.GetComponent<Worktop>();
+        if(counter == null) return false;      
+        return true; 
     }
     private GameObject GetParentObj(GameObject obj)
     {
