@@ -1322,6 +1322,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ab0689dbdda10544b1dbdf249f3a254, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1813425311}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8ab0689dbdda10544b1dbdf249f3a254, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1813425314}
   m_SourcePrefab: {fileID: 100100000, guid: 8ab0689dbdda10544b1dbdf249f3a254, type: 3}
 --- !u!1 &247226031
 GameObject:
@@ -5196,6 +5199,27 @@ MonoBehaviour:
   isBin: 0
   isStorage: 0
   isInfinite: 1
+--- !u!65 &1813425314
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813425309}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0970834, y: 1.1877837, z: 1.0531751}
+  m_Center: {x: 0.4141649, y: 0.5938704, z: 0.47341293}
 --- !u!1 &1846498651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 97fd68e83606eec47b9b0f2e592c31a2, type: 3}
@@ -6183,10 +6207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 3
+  m_CurrentQuality: 2
   m_QualitySettings:
   - serializedVersion: 3
     name: Mobile Low
@@ -64,6 +64,7 @@ QualitySettings:
     - GameCoreXboxOne
     - GameCoreScarlett
     - Windows Store Apps
+    - WebGL
   - serializedVersion: 3
     name: Mobile High
     pixelLightCount: 2
@@ -119,6 +120,7 @@ QualitySettings:
     - GameCoreXboxOne
     - GameCoreScarlett
     - Windows Store Apps
+    - WebGL
   - serializedVersion: 3
     name: PC Low
     pixelLightCount: 2
@@ -130,7 +132,7 @@ QualitySettings:
     shadowNearPlaneOffset: 3
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
-    shadowmaskMode: 0
+    shadowmaskMode: 1
     skinWeights: 2
     globalTextureMipmapLimit: 0
     textureMipmapLimitSettings: []
@@ -139,12 +141,12 @@ QualitySettings:
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 0
-    billboardsFaceCameraPosition: 0
+    billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
     vSyncCount: 0
-    realtimeGICPUUsage: 25
-    lodBias: 0.25
-    maximumLODLevel: 1
+    realtimeGICPUUsage: 50
+    lodBias: 2
+    maximumLODLevel: 0
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
@@ -192,7 +194,7 @@ QualitySettings:
     skinWeights: 4
     globalTextureMipmapLimit: 0
     textureMipmapLimitSettings: []
-    anisotropicTextures: 2
+    anisotropicTextures: 0
     antiAliasing: 0
     softParticles: 0
     softVegetation: 1
@@ -229,6 +231,7 @@ QualitySettings:
     - Android
     - Nintendo Switch
     - iPhone
+    - WebGL
   m_TextureMipmapLimitGroupNames: []
   m_PerPlatformDefaultQuality:
     Android: 1
