@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bf0df605730f8c438eb5b85f12847e9, type: 3}
+  m_Name: Meat
+  m_EditorClassIdentifier: 
+  foodName: Meat
+  foodPrefabs:
+  - {fileID: 919132149155446097, guid: 141d3d63ef23fb6469063ceccad32f99, type: 3}
+  - {fileID: 919132149155446097, guid: 975243f6de40b804986fbab6c1d50385, type: 3}
+  - {fileID: 919132149155446097, guid: 178a4f4f4e27d1d408fa75ff9dcff558, type: 3}
+  foodIndex: 0
+  currentFoodPrefab: {fileID: 919132149155446097, guid: 141d3d63ef23fb6469063ceccad32f99, type: 3}
+  isChoppable: 1
+  isCookable: 1
+  isMixable: 0
